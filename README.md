@@ -4,7 +4,7 @@
 The eight queens puzzle is the problem of placing eight chess queens on an 8×8 chessboard
 so that no two queens threaten each other, thus, a solution requires that no two queens
 share the same row, column, or diagonal. <br>
-In this repository, we implement different algorithm to solve the 8 queens problem starting from any initial state.
+In this repository, we implement different algorithms to solve the 8 queens problem starting from any initial state.
 ## How to contribute
 1. clone the repository using the command 
 
