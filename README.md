@@ -22,3 +22,12 @@ In this repository, we implement different algorithm to solve the 8 queens probl
     git commit -m "commit message"
     git push origin csp #the name of the branch
     ```
+5. If you want to implement a new feature (Either you are finished with the first one or not), execute the following commands: I assume you are now implementing feature1 and want to start working on feature2
+
+    ```bash
+    git add .
+    git commit -m "commit message"
+    git checkout stage
+    git checkout -b feature2
+    ```
+    
