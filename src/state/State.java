@@ -5,10 +5,42 @@ import java.util.ArrayList;
 public class State {
 
 	boolean[][] board; // a cell with 1 means a queen, 0 means no queen
+	public boolean[][] getBoard() {
+		return board;
+	}
+
+	public void setBoard(boolean[][] board) {
+		this.board = board;
+	}
+
+	public int getCostToReach() {
+		return costToReach;
+	}
+
+	public void setCostToReach(int costToReach) {
+		this.costToReach = costToReach;
+	}
+
+	public int[] getRowIndex() {
+		return rowIndex;
+	}
+
+	public void setRowIndex(int[] rowIndex) {
+		this.rowIndex = rowIndex;
+	}
+
+	public int[] getColumnIndex() {
+		return columnIndex;
+	}
+
+	public void setColumnIndex(int[] columnIndex) {
+		this.columnIndex = columnIndex;
+	}
+
 	int costToReach; // number of nodes visited from initial state
 	int[] rowIndex;
 	int[] columnIndex;
-	
+
 	public State(int[] rows, int[] columns, int cost) {
 		this.rowIndex = rows;
 		this.columnIndex = columns;
@@ -22,13 +54,15 @@ public class State {
 		ArrayList<State> next = new ArrayList<State>();
 		for (int i = 0; i < 8; i++) {
 			State s = null;
-			for (int i2 = rowIndex[i] - 1; i2 <= rowIndex[i] + 1; i2++ ) {
+			for (int i2 = rowIndex[i] - 1; i2 <= rowIndex[i] + 1; i2++) {
 				for (int j2 = columnIndex[i] - 1; j2 <= columnIndex[i] + 1; j2++) {
-					if (i2 == rowIndex[i] && j2 == columnIndex[i]) continue;
+					if (i2 == rowIndex[i] && j2 == columnIndex[i])
+						continue;
 					s = moveOneQueen(i2, j2, i);
 				}
 			}
-			if (s != null) next.add(s);
+			if (s != null)
+				next.add(s);
 		}
 		return next;
 	}
@@ -43,7 +77,7 @@ public class State {
 		State next = new State(tempRow, tempCol, costToReach + 1);
 		return next;
 	}
-	
+
 	private void fillBoard() {
 		this.board = new boolean[8][8];
 		for (int i = 0; i < 8; i++) {
@@ -56,9 +90,18 @@ public class State {
 	 * @return number of attacking pairs
 	 */
 	public int getStateCost() {
-		return 0;
+		int attackingPairs = 0;
+		for (int i = 0; i < 7; i++) {
+			for (int j = i + 1; j < 8; j++) {
+				if (rowIndex[i] == rowIndex[j] // same row
+						|| columnIndex[i] == columnIndex[j] // same column
+						|| Math.abs(rowIndex[j] - rowIndex[i]) == Math.abs(columnIndex[j] - columnIndex[i]) // same diagonal
+				)
+					attackingPairs++;
+			}
+		}
+		return attackingPairs;
 	}
-	
 
 	public void printBoard() {
 		for (int i = 0; i < 8; i++) {
