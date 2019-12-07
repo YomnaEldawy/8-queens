@@ -17,7 +17,7 @@ public class KBeam implements IAlgorithm {
 	}
 
 	@Override
-	public int[][] getFinalState() {
+	public State getFinalState() {
 		// TODO Auto-generated method stub
 		return null;
 	}
