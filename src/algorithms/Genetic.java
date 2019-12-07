@@ -11,15 +11,11 @@ public class Genetic implements IAlgorithm {
 
 	State current;
 
-	PriorityQueue<State> fringe = new PriorityQueue<State>(5, new StateComparator());
+	PriorityQueue<State> fringe = new PriorityQueue<State>(1, new StateComparator());
 	HashSet<State> visited = new HashSet<State>();
+
 	public Genetic(State initial) {
-		//this.current = initial;
-		//fringe.add(current);
-		ArrayList<State> neighbors = initial.getNextStates();
-		fringe.addAll(neighbors);
-		visited.addAll(neighbors);
-		search();
+		fringe.add(initial);
 	}
 
 	@Override
@@ -52,48 +48,76 @@ public class Genetic implements IAlgorithm {
 		return null;
 	}
 
-	private void search() {
+	public void search() {
 		int iterations = 0;
-		while (fringe.peek().getStateCost() > 0) {
-			iterations++;
-			ArrayList<State> allStates = new ArrayList<State>(fringe);
-			int index1 = (int) (Math.pow(Math.random(), 2) * allStates.size());
-			int index2 = (int) (Math.pow(Math.random(), 2) * allStates.size());
-			State newBorn = crossOver(allStates.get(index1), allStates.get(index2));
-			if (visited.contains(newBorn)) continue;
-			fringe.add(newBorn);
-			if (iterations >= 100000)
-				break;
+		while (fringe.peek().getStateCost() > 0 && ++iterations < 80000) {
+			if (fringe.size() < 100) {
+				State s1 = randomValid(), s2 = randomValid();
+				if (!visited.contains(s1)) {
+					visited.add(s1);
+					fringe.add(s1);
+				}
+				if (!visited.contains(s2)) {
+					visited.add(s2);
+					fringe.add(s2);
+				}
+			}
+			ArrayList<State> statesList = new ArrayList<State>(fringe);
+			int limit = statesList.size();
+			int index1 = (int) (Math.pow(Math.random(), 3) * limit);
+			int index2 = (int) (Math.pow(Math.random(), 3) * limit);
+			State child = crossOver(statesList.get(index1), statesList.get(index2));
+			if (!visited.contains(child)) {
+				fringe.add(child);
+				visited.add(child);
+			}
 		}
+		System.out.println("iterations = " + iterations);
 	}
 
-	private State crossOver(State s1, State s2) {
-		int[] rows1 = s1.getRowIndex();
-		int[] cols1 = s1.getColumnIndex();
-		int[] rows2 = s2.getRowIndex();
-		int[] cols2 = s2.getColumnIndex();
-		int[] rows = new int[8], cols = new int[8];
-		boolean[][] containsQueen = new boolean[8][8];
-//		System.out.println("mating: ");
-//		s1.printBoard();
-//		System.out.println("and");
-//		s2.printBoard();
+	public State crossOver(State s1, State s2) {
+		int[] newRows = new int[8], newCols = new int[8];
+		boolean[][] board = new boolean[8][8];
+		int[] r1 = s1.getRowIndex(), c1 = s1.getColumnIndex();
+		int[] r2 = s2.getRowIndex(), c2 = s2.getColumnIndex();
 		for (int i = 0; i < 8; i++) {
-			if (Math.random() > 0.5 && !containsQueen[rows1[i]][cols1[i]]) {
-				rows[i] = rows1[i];
-				cols[i] = cols1[i];
+			double probability = Math.random();
+			if (probability > 0.5 && !board[r1[i]][c1[i]]) {
+				newRows[i] = r1[i];
+				newCols[i] = c1[i];
 			} else {
-				rows[i] = rows2[i];
-				cols[i] = cols2[i];
+				newRows[i] = r2[i];
+				newCols[i] = c2[i];
 			}
-			containsQueen[rows[i]][cols[i]] = true;
+			while (board[newRows[i]][newCols[i]]) {
+				newRows[i] = (int) (Math.random() * 8);
+				newCols[i] = (int) (Math.random() * 8);
+			}
+			board[newRows[i]][newCols[i]] = true;
 		}
-		State s = new State(rows, cols, max(s1.getCostToReach(), s2.getCostToReach()));
-		return s;
+		State child = new State(newRows, newCols, max(s1.getCostToReach(), s2.getCostToReach()));
+		return child;
 	}
 
 	int max(int n1, int n2) {
 		return n1 > n2 ? n1 : n2;
+	}
+
+	public static State randomValid() {
+		boolean[][] board = new boolean[8][8];
+		int[] rows = new int[8], cols = new int[8];
+		for (int i = 0; i < 8; i++) {
+			int rand1 = (int) (Math.random() * 8);
+			int rand2 = (int) (Math.random() * 8);
+			while (board[rand1][rand2]) {
+				rand1 = (int) (Math.random() * 8);
+				rand2 = (int) (Math.random() * 8);
+			}
+			rows[i] = rand1;
+			cols[i] = rand2;
+			board[rand1][rand2] = true;
+		}
+		return new State(rows, cols, 0);
 	}
 }
 
