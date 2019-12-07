@@ -54,7 +54,8 @@ public class Genetic implements IAlgorithm {
 	}
 	
 	private State crossOver(State s1, State s2) {
-		
+		int[] rows1 = s1.getRowIndex();
+		int[] cols1 = s1.getColumnIndex();
 		return null;
 	}
 }
