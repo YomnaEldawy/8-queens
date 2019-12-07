@@ -23,21 +23,29 @@ public class Demo {
 				columns[i] = column;
 			}
 		}
+		
+		/**
+		 * testing state neighbors
+		 */
 		State s = new State(rows, columns, 0);
 		System.out.println("initial");
 		s.printBoard();
 		System.out.println();
-		ArrayList<State> next = s.getNextStates();
-//		String algorithmName;
-//		System.out.println("Enter the algorithm name");
-//		algorithmName = input.nextLine();
-//		// TODO: switch case and create an algorithm instance accordingly
-//		// for example, this is similar to what will be written in case of CSP
-//		IAlgorithm algorithm = new CSP(board);
-//		System.out.println(algorithm.getRunTime());
-//		System.out.println(algorithm.getCost());
-//		System.out.println(algorithm.getExpandedNodes());
+		s.getNextStates();
 		
+		/*
+		 * This should be the way we call any algorithm
+		 */
+		String algorithmName;
+		System.out.println("Enter the algorithm name");
+		algorithmName = input.nextLine();
+		// TODO: switch case and create an algorithm instance accordingly
+		// for example, this is similar to what will be written in case of CSP
+		IAlgorithm algorithm = new CSP(s);
+		System.out.println(algorithm.getRunTime());
+		System.out.println(algorithm.getCost());
+		System.out.println(algorithm.getExpandedNodes());
+		input.close();
 	}
 
 }
