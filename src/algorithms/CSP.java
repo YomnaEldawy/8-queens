@@ -1,6 +1,7 @@
 package algorithms;
 
 import java.util.ArrayList;
+import state.*;
 
 public class CSP implements IAlgorithm{
 
@@ -9,7 +10,7 @@ public class CSP implements IAlgorithm{
 	 * @param board: initial board
 	 * calls a function to start searching
 	 */
-	public CSP(boolean[][] board) {
+	public CSP(State initial) {
 		
 	}
 	
@@ -38,7 +39,7 @@ public class CSP implements IAlgorithm{
 	}
 
 	@Override
-	public ArrayList<boolean[][]> getPath() {
+	public ArrayList<State> getPath() {
 		// TODO Auto-generated method stub
 		return null;
 	}

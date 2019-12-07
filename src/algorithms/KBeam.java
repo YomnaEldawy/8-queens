@@ -2,11 +2,14 @@ package algorithms;
 
 import java.util.ArrayList;
 
+import state.State;
+
 public class KBeam implements IAlgorithm {
 
-	public KBeam(boolean[][] board) {
+	public KBeam(State initial) {
 		
 	}
+	
 	@Override
 	public int getRunTime() {
 		// TODO Auto-generated method stub
@@ -32,7 +35,7 @@ public class KBeam implements IAlgorithm {
 	}
 
 	@Override
-	public ArrayList<boolean[][]> getPath() {
+	public ArrayList<State> getPath() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -2,9 +2,11 @@ package algorithms;
 
 import java.util.ArrayList;
 
+import state.State;
+
 public class HillClimbing implements IAlgorithm{
 
-	public HillClimbing(boolean[][] board) {
+	public HillClimbing(State initial) {
 		
 	}
 	@Override
@@ -32,7 +34,7 @@ public class HillClimbing implements IAlgorithm{
 	}
 
 	@Override
-	public ArrayList<boolean[][]> getPath() {
+	public ArrayList<State> getPath() {
 		// TODO Auto-generated method stub
 		return null;
 	}
