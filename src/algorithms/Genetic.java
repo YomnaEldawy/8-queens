@@ -1,13 +1,18 @@
 package algorithms;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import state.State;
 
 public class Genetic implements IAlgorithm {
 
+	State current;
+	PriorityQueue<State> fringe = new PriorityQueue<State>();
 	public Genetic(State initial) {
-		
+		this.current = initial;
+		fringe.add(current);
+		search();
 	}
 	@Override
 	public int getRunTime() {
@@ -37,6 +42,12 @@ public class Genetic implements IAlgorithm {
 	public ArrayList<State> getPath() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private void search() {
+		while (current.getStateCost() > 0) {
+			
+		}
 	}
 
 }
