@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class State {
 
 	boolean[][] board; // a cell with 1 means a queen, 0 means no queen
+
 	public boolean[][] getBoard() {
 		return board;
 	}
@@ -35,6 +36,19 @@ public class State {
 
 	public void setColumnIndex(int[] columnIndex) {
 		this.columnIndex = columnIndex;
+	}
+
+	/*
+	 * returns a string containing rowIndex elements concatenated with colIndex used
+	 * to hash a state
+	 */
+	public String getEquivalentString() {
+		String s = "";
+		for (int n : rowIndex)
+			s = s + n;
+		for (int n : columnIndex)
+			s = s + n;
+		return s;
 	}
 
 	int costToReach; // number of nodes visited from initial state
@@ -95,7 +109,8 @@ public class State {
 			for (int j = i + 1; j < 8; j++) {
 				if (rowIndex[i] == rowIndex[j] // same row
 						|| columnIndex[i] == columnIndex[j] // same column
-						|| Math.abs(rowIndex[j] - rowIndex[i]) == Math.abs(columnIndex[j] - columnIndex[i]) // same diagonal
+						|| Math.abs(rowIndex[j] - rowIndex[i]) == Math.abs(columnIndex[j] - columnIndex[i]) // same
+																											// diagonal
 				)
 					attackingPairs++;
 			}
