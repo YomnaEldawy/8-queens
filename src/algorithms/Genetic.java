@@ -1,6 +1,7 @@
 package algorithms;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import state.State;
@@ -8,7 +9,9 @@ import state.State;
 public class Genetic implements IAlgorithm {
 
 	State current;
-	PriorityQueue<State> fringe = new PriorityQueue<State>();
+	
+	PriorityQueue<State> fringe = new PriorityQueue<State>(1, new StateComparator());
+	
 	public Genetic(State initial) {
 		this.current = initial;
 		fringe.add(current);
@@ -49,5 +52,20 @@ public class Genetic implements IAlgorithm {
 			
 		}
 	}
-
+	
+	private State crossOver(State s1, State s2) {
+		
+		return null;
+	}
 }
+class StateComparator implements Comparator<State>{
+
+	@Override
+	public int compare(State s1, State s2) {
+		if (s1.getStateCost() > s2.getStateCost())
+			return 1;
+		return -1;
+	}
+	
+}
+
