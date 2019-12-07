@@ -5,6 +5,38 @@ import java.util.ArrayList;
 public class State {
 
 	boolean[][] board; // a cell with 1 means a queen, 0 means no queen
+	public boolean[][] getBoard() {
+		return board;
+	}
+
+	public void setBoard(boolean[][] board) {
+		this.board = board;
+	}
+
+	public int getCostToReach() {
+		return costToReach;
+	}
+
+	public void setCostToReach(int costToReach) {
+		this.costToReach = costToReach;
+	}
+
+	public int[] getRowIndex() {
+		return rowIndex;
+	}
+
+	public void setRowIndex(int[] rowIndex) {
+		this.rowIndex = rowIndex;
+	}
+
+	public int[] getColumnIndex() {
+		return columnIndex;
+	}
+
+	public void setColumnIndex(int[] columnIndex) {
+		this.columnIndex = columnIndex;
+	}
+
 	int costToReach; // number of nodes visited from initial state
 	int[] rowIndex;
 	int[] columnIndex;
