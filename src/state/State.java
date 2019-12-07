@@ -12,9 +12,17 @@ public class State {
 		this.costToReach = costToReach;
 	}
 	
-	//TODO: get all possible next states. any queen can move up, down, left or right
+	//TODO: get all possible next states. each queen can move up, down, left, right or diagonally
 	ArrayList<State> getNextStates(){
 		
 		return null;
+	}
+	
+	//TODO: 
+	/**
+	 * @return number of attacking pairs
+	 */
+	public int getStateCost() {
+		return 0;
 	}
 }

@@ -6,15 +6,20 @@ so that no two queens threaten each other, thus, a solution requires that no two
 share the same row, column, or diagonal. <br>
 In this repository, we implement different algorithm to solve the 8 queens problem starting from any initial state.
 ## How to contribute
-1. clone the repository using the command 
+1. Initialize a git repository using 
+    ``` git init```
+2.  execute the following command
 
-    ```git clone https://github.com/YomnaEldawy/8-queens.git```
+    ``` git remote add origin https://github.com/YomnaEldawy/8-queens.git``` <br>
+    then enter your username and password
+3. execute
+    ```bash
+    git pull origin stage
+    git checkout stage
+    ```
 2. create a new branch with the name of the algorithm or class you are implementing using the following command (I will provide csp as an example)
 
     ``` git checkout -b csp```
-3. execute the following command
-
-    ``` git remote add origin https://github.com/YomnaEldawy/8-queens.git```
 4. when you are done with your class, commit and push the branch to the repo using the following commands
 
     ```bash
@@ -30,4 +35,3 @@ In this repository, we implement different algorithm to solve the 8 queens probl
     git checkout stage
     git checkout -b feature2
     ```
-    
