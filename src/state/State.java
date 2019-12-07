@@ -73,11 +73,14 @@ public class State {
 					if (i2 == rowIndex[i] && j2 == columnIndex[i])
 						continue;
 					s = moveOneQueen(i2, j2, i);
+					if (s != null) {
+						s.printBoard();
+						next.add(s);
+					}
 				}
 			}
-			if (s != null)
-				next.add(s);
 		}
+		System.out.println(next.size());
 		return next;
 	}
 
@@ -107,12 +110,17 @@ public class State {
 		int attackingPairs = 0;
 		for (int i = 0; i < 7; i++) {
 			for (int j = i + 1; j < 8; j++) {
+				//System.out.println("Comparing: ");
+				//System.out.println(rowIndex[i] + ", " + columnIndex[i] + " and " + rowIndex[j] + ", " + columnIndex[j]);
 				if (rowIndex[i] == rowIndex[j] // same row
 						|| columnIndex[i] == columnIndex[j] // same column
 						|| Math.abs(rowIndex[j] - rowIndex[i]) == Math.abs(columnIndex[j] - columnIndex[i]) // same
 																											// diagonal
 				)
+				{
+					//System.out.println("attacking pairs = " + attackingPairs);
 					attackingPairs++;
+				}
 			}
 		}
 		return attackingPairs;

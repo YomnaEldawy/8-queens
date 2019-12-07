@@ -28,23 +28,17 @@ public class Demo {
 		 * testing state neighbors
 		 */
 		State s = new State(rows, columns, 0);
-		System.out.println("initial");
-		s.printBoard();
-		System.out.println();
-		s.getNextStates();
 		
 		/*
 		 * This should be the way we call any algorithm
 		 */
-		String algorithmName;
-		System.out.println("Enter the algorithm name");
-		algorithmName = input.nextLine();
 		// TODO: switch case and create an algorithm instance accordingly
 		// for example, this is similar to what will be written in case of CSP
-		IAlgorithm algorithm = new CSP(s);
-		System.out.println(algorithm.getRunTime());
-		System.out.println(algorithm.getCost());
-		System.out.println(algorithm.getExpandedNodes());
+		IAlgorithm algorithm = new Genetic(s);
+		State finalState = algorithm.getFinalState();
+		System.out.println("Final state:");
+		finalState.printBoard();
+		System.out.println("Attacking pairs = " + finalState.getStateCost());
 		input.close();
 	}
 
