@@ -2,6 +2,12 @@ package state;
 
 import java.util.Comparator;
 
+/**
+ * This class could be used when creating a priority queue.
+ * peek element will contain the state with minimum number of attacking pairs
+ * @author yomna
+ *
+ */
 
 class StateComparator implements Comparator<State> {
 
