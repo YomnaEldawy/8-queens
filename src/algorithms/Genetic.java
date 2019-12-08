@@ -1,11 +1,11 @@
 package algorithms;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
 import state.State;
+import state.StateComparator;
 
 public class Genetic implements IAlgorithm {
 
@@ -119,17 +119,4 @@ public class Genetic implements IAlgorithm {
 		}
 		return new State(rows, cols, 0);
 	}
-}
-
-class StateComparator implements Comparator<State> {
-
-	@Override
-	public int compare(State s1, State s2) {
-		if (s1.getStateCost() > s2.getStateCost())
-			return 1;
-		if (s1.getStateCost() < s2.getStateCost())
-			return -1;
-		return 0;
-	}
-
 }
