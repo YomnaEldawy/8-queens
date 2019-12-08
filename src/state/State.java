@@ -135,4 +135,21 @@ public class State {
 			System.out.println();
 		}
 	}
+	
+	public static State random() {
+		boolean[][] board = new boolean[8][8];
+		int[] rows = new int[8], cols = new int[8];
+		for (int i = 0; i < 8; i++) {
+			int rand1 = (int) (Math.random() * 8);
+			int rand2 = (int) (Math.random() * 8);
+			while (board[rand1][rand2]) {
+				rand1 = (int) (Math.random() * 8);
+				rand2 = (int) (Math.random() * 8);
+			}
+			rows[i] = rand1;
+			cols[i] = rand2;
+			board[rand1][rand2] = true;
+		}
+		return new State(rows, cols, 0);
+	}
 }
