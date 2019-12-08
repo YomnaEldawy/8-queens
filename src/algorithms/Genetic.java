@@ -12,7 +12,7 @@ public class Genetic implements IAlgorithm {
 	State current;
 
 	PriorityQueue<State> fringe = new PriorityQueue<State>(1, new StateComparator());
-	HashSet<State> visited = new HashSet<State>();
+	HashSet<String> visited = new HashSet<String>();
 
 	public Genetic(State initial) {
 		fringe.add(initial);
@@ -50,15 +50,15 @@ public class Genetic implements IAlgorithm {
 
 	public void search() {
 		int iterations = 0;
-		while (fringe.peek().getStateCost() > 0 && ++iterations < 80000) {
+		while (fringe.peek().getStateCost() > 0 && ++iterations < 90000) {
 			if (fringe.size() < 100) {
 				State s1 = randomValid(), s2 = randomValid();
 				if (!visited.contains(s1)) {
-					visited.add(s1);
+					visited.add(s1.getEquivalentString());
 					fringe.add(s1);
 				}
 				if (!visited.contains(s2)) {
-					visited.add(s2);
+					visited.add(s2.getEquivalentString());
 					fringe.add(s2);
 				}
 			}
@@ -67,9 +67,9 @@ public class Genetic implements IAlgorithm {
 			int index1 = (int) (Math.pow(Math.random(), 3) * limit);
 			int index2 = (int) (Math.pow(Math.random(), 3) * limit);
 			State child = crossOver(statesList.get(index1), statesList.get(index2));
-			if (!visited.contains(child)) {
+			if (!visited.contains(child.getEquivalentString())) {
 				fringe.add(child);
-				visited.add(child);
+				visited.add(child.getEquivalentString());
 			}
 		}
 		System.out.println("iterations = " + iterations);
@@ -95,7 +95,7 @@ public class Genetic implements IAlgorithm {
 			}
 			board[newRows[i]][newCols[i]] = true;
 		}
-		State child = new State(newRows, newCols, max(s1.getCostToReach(), s2.getCostToReach()));
+		State child = new State(newRows, newCols, 1 + max(s1.getCostToReach(), s2.getCostToReach()));
 		return child;
 	}
 

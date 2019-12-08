@@ -14,6 +14,7 @@ public class GeneticDemo {
 		System.out.println("final state");
 		f.printBoard();
 		System.out.println(f.getStateCost());
+		System.out.println(f.getCostToReach());
 		
 	}
 	
