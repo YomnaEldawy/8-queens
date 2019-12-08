@@ -52,7 +52,7 @@ public class Genetic implements IAlgorithm {
 	public void search() {
 		int iterations = 0;
 		for (int i = 0; i < 50; i++) {
-			State s1 = randomValid();
+			State s1 = State.random();
 			if (!visited.contains(s1.getEquivalentString())) {
 				visited.add(s1.getEquivalentString());
 				fringe.add(s1);
@@ -105,22 +105,5 @@ public class Genetic implements IAlgorithm {
 
 	int max(int n1, int n2) {
 		return n1 > n2 ? n1 : n2;
-	}
-
-	public static State randomValid() {
-		boolean[][] board = new boolean[8][8];
-		int[] rows = new int[8], cols = new int[8];
-		for (int i = 0; i < 8; i++) {
-			int rand1 = (int) (Math.random() * 8);
-			int rand2 = (int) (Math.random() * 8);
-			while (board[rand1][rand2]) {
-				rand1 = (int) (Math.random() * 8);
-				rand2 = (int) (Math.random() * 8);
-			}
-			rows[i] = rand1;
-			cols[i] = rand2;
-			board[rand1][rand2] = true;
-		}
-		return new State(rows, cols, 0);
 	}
 }
