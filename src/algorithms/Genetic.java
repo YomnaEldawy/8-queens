@@ -50,18 +50,14 @@ public class Genetic implements IAlgorithm {
 
 	public void search() {
 		int iterations = 0;
-		while (fringe.peek().getStateCost() > 0 && ++iterations < 90000) {
-			if (fringe.size() < 100) {
-				State s1 = randomValid(), s2 = randomValid();
-				if (!visited.contains(s1)) {
-					visited.add(s1.getEquivalentString());
-					fringe.add(s1);
-				}
-				if (!visited.contains(s2)) {
-					visited.add(s2.getEquivalentString());
-					fringe.add(s2);
-				}
+		for (int i = 0; i < 50; i++) {
+			State s1 = randomValid();
+			if (!visited.contains(s1.getEquivalentString())) {
+				visited.add(s1.getEquivalentString());
+				fringe.add(s1);
 			}
+		}
+		while (fringe.peek().getStateCost() > 0 && ++iterations < 70000) {
 			ArrayList<State> statesList = new ArrayList<State>(fringe);
 			int limit = statesList.size();
 			int index1 = (int) (Math.pow(Math.random(), 3) * limit);
@@ -72,6 +68,7 @@ public class Genetic implements IAlgorithm {
 				visited.add(child.getEquivalentString());
 			}
 		}
+		
 		System.out.println("iterations = " + iterations);
 	}
 
