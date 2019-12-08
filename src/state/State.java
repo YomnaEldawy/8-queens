@@ -74,13 +74,11 @@ public class State {
 						continue;
 					s = moveOneQueen(i2, j2, i);
 					if (s != null) {
-						s.printBoard();
 						next.add(s);
 					}
 				}
 			}
 		}
-		System.out.println(next.size());
 		return next;
 	}
 
