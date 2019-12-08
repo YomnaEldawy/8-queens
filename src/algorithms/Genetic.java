@@ -48,6 +48,7 @@ public class Genetic implements IAlgorithm {
 		return null;
 	}
 
+	int trials = 0;
 	public void search() {
 		int iterations = 0;
 		for (int i = 0; i < 50; i++) {
@@ -57,7 +58,7 @@ public class Genetic implements IAlgorithm {
 				fringe.add(s1);
 			}
 		}
-		while (fringe.peek().getStateCost() > 0 && ++iterations < 70000) {
+		while (fringe.peek().getStateCost() > 0 && ++iterations < 50000) {
 			ArrayList<State> statesList = new ArrayList<State>(fringe);
 			int limit = statesList.size();
 			int index1 = (int) (Math.pow(Math.random(), 3) * limit);
@@ -68,8 +69,14 @@ public class Genetic implements IAlgorithm {
 				visited.add(child.getEquivalentString());
 			}
 		}
-		
 		System.out.println("iterations = " + iterations);
+		if (trials++ < 3 && fringe.peek().getStateCost() > 0) {
+			fringe.clear();
+			visited.clear();
+			System.out.println("Attempt " + trials + " failed, starting over");
+			search();
+		}
+		
 	}
 
 	public State crossOver(State s1, State s2) {
