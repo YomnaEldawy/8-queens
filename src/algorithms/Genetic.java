@@ -58,7 +58,7 @@ public class Genetic implements IAlgorithm {
 				fringe.add(s1);
 			}
 		}
-		while (fringe.peek().getStateCost() > 0 && ++iterations < 50000) {
+		while (fringe.peek().getStateCost() > 0 && ++iterations < 60000) {
 			ArrayList<State> statesList = new ArrayList<State>(fringe);
 			int limit = statesList.size();
 			int index1 = (int) (Math.pow(Math.random(), 3) * limit);
