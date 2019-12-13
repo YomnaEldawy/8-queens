@@ -1,10 +1,38 @@
 package state;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class State {
 
 	boolean[][] board; // a cell with 1 means a queen, 0 means no queen
+//    MyPair[] indexes ;	
+//	public MyPair[] getIndexes() {
+//		return indexes;
+//	}
+//
+//	public void setIndexes(MyPair[] indexes) {
+//		this.indexes = indexes;
+//	}
+//
+//	public class MyPair
+//	{
+//		private final int i;
+//		private final int j;
+//
+//		public MyPair(int aKey, int aValue)
+//		{
+//			i   = aKey;
+//			j = aValue;
+//		}
+//
+//		public int key()   { return i; }
+//		public int value() { return j; }
+//	}
+//	public State(){
+//		indexes = new MyPair[8];
+//	}
 
 	public boolean[][] getBoard() {
 		return board;
@@ -108,12 +136,15 @@ public class State {
 		int attackingPairs = 0;
 		for (int i = 0; i < 7; i++) {
 			for (int j = i + 1; j < 8; j++) {
+				//System.out.println("Comparing: ");
+				//System.out.println(rowIndex[i] + ", " + columnIndex[i] + " and " + rowIndex[j] + ", " + columnIndex[j]);
 				if (rowIndex[i] == rowIndex[j] // same row
 						|| columnIndex[i] == columnIndex[j] // same column
 						|| Math.abs(rowIndex[j] - rowIndex[i]) == Math.abs(columnIndex[j] - columnIndex[i]) // same
 																											// diagonal
 				)
 				{
+					//System.out.println("attacking pairs = " + attackingPairs);
 					attackingPairs++;
 				}
 			}
@@ -149,4 +180,45 @@ public class State {
 		}
 		return new State(rows, cols, 0);
 	}
+//	//kBeam functions
+//	//generate random board
+//	public void generateQueenBoard()
+//	{
+//		Random rand = new Random();
+//		this.rowIndex = new int[8];
+//		this.columnIndex= new int[8];
+//		board = new boolean[8][8];
+//		for(int i=0;i<8;i++)
+//		{
+//			int n = rand.nextInt(8);
+//			rowIndex[i] = n;
+//			columnIndex[i] = i;
+//			board[n][i] = true;
+//			indexes[i] = new MyPair(n,i);
+//		}
+//
+//	}
+//    //generate new successor by moving a queen on the board
+//	public void generateQueenBoardFromGivenBestBoard( int j, int x)
+//	{
+//		board[indexes[j].i][indexes[j].j]=false;//Second board replaces at his own board ,at specific column, 1 to be 0
+//		board[x][j]= true;//complete replacement of 1
+//		indexes[j] = new MyPair(x,j);//save that index for later
+//		columnIndex[j] = j;
+//		rowIndex[j] = x;
+//	}
+//	
+//	public void copy(State oldQueenBoard) {
+//		this.board = new boolean[8][8];
+//		for (int i = 0; i < oldQueenBoard.board.length; i++) {
+//			this.board[i] = Arrays.copyOf(oldQueenBoard.board[i], oldQueenBoard.board[i].length);
+//
+//		}
+//
+//		this.indexes = oldQueenBoard.indexes.clone();
+//		this.rowIndex = oldQueenBoard.rowIndex.clone();
+//		this.columnIndex = oldQueenBoard.columnIndex.clone();
+//	}
+//	
+	
 }
