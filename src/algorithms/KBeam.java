@@ -104,9 +104,9 @@ public class KBeam implements IAlgorithm {
 			State s;
 			do {
 				s = State.random();
-				IndexesOfFirstBoards.add(s);
-				Kboard.add(s);
 			}while(visited.contains(s.getEquivalentString()));
+			IndexesOfFirstBoards.add(s);
+			Kboard.add(s);
 			visited.add(s.getEquivalentString());
 		}
 		System.out.println("First generation");
