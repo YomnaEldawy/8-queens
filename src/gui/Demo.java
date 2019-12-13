@@ -34,7 +34,7 @@ public class Demo {
 		 */
 		// TODO: switch case and create an algorithm instance accordingly
 		// for example, this is similar to what will be written in case of CSP
-		IAlgorithm algorithm = new Genetic(s);
+		IAlgorithm algorithm = new Genetic();
 		State finalState = algorithm.getFinalState();
 		System.out.println("Final state:");
 		finalState.printBoard();
