@@ -10,18 +10,22 @@ import state.StateComparator;
 public class Genetic implements IAlgorithm {
 
 	State current;
-
+	long totalTime = 0;
 	PriorityQueue<State> fringe = new PriorityQueue<State>(1, new StateComparator());
 	HashSet<String> visited = new HashSet<String>();
+	int expandedNodes = 0;
 
 	public Genetic(State initial) {
 		fringe.add(initial);
+		long start = System.currentTimeMillis();
+		search();
+		totalTime = System.currentTimeMillis()- start;
 	}
 
 	@Override
 	public int getRunTime() {
 		// TODO Auto-generated method stub
-		return 0;
+		return (int) totalTime;
 	}
 
 	@Override
@@ -33,13 +37,14 @@ public class Genetic implements IAlgorithm {
 	@Override
 	public int getCost() {
 		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public int getExpandedNodes() {
 		// TODO Auto-generated method stub
-		return 0;
+		return expandedNodes;
 	}
 
 	@Override
@@ -67,6 +72,7 @@ public class Genetic implements IAlgorithm {
 			if (!visited.contains(child.getEquivalentString())) {
 				fringe.add(child);
 				visited.add(child.getEquivalentString());
+				expandedNodes++;
 			}
 		}
 		System.out.println("iterations = " + iterations);

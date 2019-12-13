@@ -15,6 +15,7 @@ public class GeneticDemo {
 		f.printBoard();
 		System.out.println(f.getStateCost());
 		System.out.println(f.getCostToReach());
-		
+		System.out.println("total time = " + g.getRunTime() + "ms");
+		System.out.println("Expanded nodes = " + g.getExpandedNodes());
 	}
 }
