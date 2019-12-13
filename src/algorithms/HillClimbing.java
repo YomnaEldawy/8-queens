@@ -9,7 +9,8 @@ public class HillClimbing implements IAlgorithm {
 	State current;
 	long totalTime;
 	int expandedNodes = 0;
-
+	ArrayList<State> path = new ArrayList<State>();
+	
 	public HillClimbing(State initial) {
 		this.current = initial;
 		long start = System.currentTimeMillis();
@@ -19,26 +20,23 @@ public class HillClimbing implements IAlgorithm {
 
 	@Override
 	public int getRunTime() {
-		// TODO Auto-generated method stub
 		return (int) totalTime;
 	}
 
 	@Override
 	public State getFinalState() {
-		// TODO Auto-generated method stub
 		return current;
 	}
 
 	@Override
 	public int getCost() {
-		// TODO Auto-generated method stub
 		return current.getCostToReach();
 	}
 
 	@Override
 	public int getExpandedNodes() {
 		// TODO Auto-generated method stub
-		return 0;
+		return expandedNodes;
 	}
 
 	public void search() {
@@ -47,6 +45,7 @@ public class HillClimbing implements IAlgorithm {
 		int sidewayMoves = 0;
 		while (iterations++ < maxIterations && current.getStateCost() > 0) {
 			ArrayList<State> next = current.getNextStates();
+			expandedNodes += next.size();
 			Collections.sort(next, new StateComparator());
 			System.out.println(current.getStateCost());
 			if (next.get(0).getStateCost() < current.getStateCost()) {
@@ -59,14 +58,16 @@ public class HillClimbing implements IAlgorithm {
 			} else {
 				System.out.println("Starting over!");
 				current = State.random();
+				path = new ArrayList<State>();
 			}
+			path.add(current);
 		}
-		System.out.println(iterations);
+		System.out.println("Iterations = " + iterations);
 	}
 
 	@Override
 	public ArrayList<State> getPath() {
 		// TODO Auto-generated method stub
-		return null;
+		return path;
 	}
 }

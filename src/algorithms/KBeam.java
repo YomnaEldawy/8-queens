@@ -114,31 +114,26 @@ public class KBeam implements IAlgorithm {
 	
 	@Override
 	public int getRunTime() {
-		// TODO Auto-generated method stub
 		return takenTime;
 	}
 
 	@Override
 	public State getFinalState() {
-		// TODO Auto-generated method stub
 		return finalState;
 	}
 
 	@Override
 	public int getCost() {
-		// TODO Auto-generated method stub
 		return iterations+1;
 	}
 
 	@Override
 	public int getExpandedNodes() {
-		// TODO Auto-generated method stub
 		return expandedNodes;
 	}
 
 	@Override
 	public ArrayList<State> getPath() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

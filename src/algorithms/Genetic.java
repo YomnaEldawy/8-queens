@@ -37,18 +37,16 @@ public class Genetic implements IAlgorithm {
 
 	@Override
 	public int getExpandedNodes() {
-		// TODO Auto-generated method stub
 		return expandedNodes;
 	}
 
 	@Override
 	public ArrayList<State> getPath() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	int trials = 0;
-	public void search() {
+	private void search() {
 		int iterations = 0;
 		for (int i = 0; i < 50; i++) {
 			State s1 = State.random();
@@ -79,7 +77,7 @@ public class Genetic implements IAlgorithm {
 		
 	}
 
-	public State crossOver(State s1, State s2) {
+	private State crossOver(State s1, State s2) {
 		int[] newRows = new int[8], newCols = new int[8];
 		boolean[][] board = new boolean[8][8];
 		int[] r1 = s1.getRowIndex(), c1 = s1.getColumnIndex();
@@ -102,8 +100,10 @@ public class Genetic implements IAlgorithm {
 		State child = new State(newRows, newCols, 1 + max(s1.getCostToReach(), s2.getCostToReach()));
 		return child;
 	}
+	
+	
 
-	int max(int n1, int n2) {
+	private int max(int n1, int n2) {
 		return n1 > n2 ? n1 : n2;
 	}
 }

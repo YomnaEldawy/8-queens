@@ -9,7 +9,7 @@ import state.State;
 public class AlgorithmViewer {
 
 	public static void main(String[] args) {
-		IAlgorithm algor = new KBeam(1000000, 100);
+		IAlgorithm algor = new KBeam(100000, 40);
 		System.out.println("--------------------------");
 		System.out.println("Final state:");
 		algor.getFinalState().printBoard();

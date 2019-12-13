@@ -18,6 +18,10 @@ public class State {
 		return columnIndex;
 	}
 
+	public boolean[][] getBoard() {
+		return board;
+	}
+
 	/*
 	 * returns a string containing rowIndex elements concatenated with colIndex used
 	 * to hash a state
