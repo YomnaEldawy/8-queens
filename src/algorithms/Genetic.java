@@ -17,7 +17,7 @@ public class Genetic implements IAlgorithm {
 	public Genetic() {
 		long start = System.currentTimeMillis();
 		search();
-		totalTime = System.currentTimeMillis()- start;
+		totalTime = System.currentTimeMillis() - start;
 	}
 
 	@Override
@@ -46,6 +46,7 @@ public class Genetic implements IAlgorithm {
 	}
 
 	int trials = 0;
+
 	private void search() {
 		int iterations = 0;
 		for (int i = 0; i < 50; i++) {
@@ -60,11 +61,13 @@ public class Genetic implements IAlgorithm {
 			int limit = statesList.size();
 			int index1 = (int) (Math.pow(Math.random(), 3) * limit);
 			int index2 = (int) (Math.pow(Math.random(), 3) * limit);
-			State child = crossOver(statesList.get(index1), statesList.get(index2));
-			if (!visited.contains(child.getEquivalentString())) {
-				fringe.add(child);
-				visited.add(child.getEquivalentString());
-				expandedNodes++;
+			ArrayList<State> children = crossOver(statesList.get(index1), statesList.get(index2));
+			for (int i = 0; i < 2; i++) {
+				if (!visited.contains(children.get(i).getEquivalentString())) {
+					fringe.add(children.get(i));
+					visited.add(children.get(i).getEquivalentString());
+					expandedNodes++;
+				}
 			}
 		}
 		System.out.println("iterations = " + iterations);
@@ -74,12 +77,14 @@ public class Genetic implements IAlgorithm {
 			System.out.println("Attempt " + trials + " failed, starting over");
 			search();
 		}
-		
+
 	}
 
-	private State crossOver(State s1, State s2) {
+	private ArrayList<State> crossOver(State s1, State s2) {
 		int[] newRows = new int[8], newCols = new int[8];
+		int[] newRows2 = new int[8], newCols2 = new int[8];
 		boolean[][] board = new boolean[8][8];
+		boolean[][] board2 = new boolean[8][8];
 		int[] r1 = s1.getRowIndex(), c1 = s1.getColumnIndex();
 		int[] r2 = s2.getRowIndex(), c2 = s2.getColumnIndex();
 		for (int i = 0; i < 8; i++) {
@@ -87,21 +92,32 @@ public class Genetic implements IAlgorithm {
 			if (probability > 0.5 && !board[r1[i]][c1[i]]) {
 				newRows[i] = r1[i];
 				newCols[i] = c1[i];
+				newRows2[i] = r2[i];
+				newCols2[i] = c2[i];
 			} else {
 				newRows[i] = r2[i];
 				newCols[i] = c2[i];
+				newRows2[i] = r1[i];
+				newCols2[i] = c1[i];
 			}
 			while (board[newRows[i]][newCols[i]]) {
 				newRows[i] = (int) (Math.random() * 8);
 				newCols[i] = (int) (Math.random() * 8);
 			}
+			while (board2[newRows2[i]][newCols2[i]]) {
+				newRows2[i] = (int) (Math.random() * 8);
+				newCols2[i] = (int) (Math.random() * 8);
+			}
 			board[newRows[i]][newCols[i]] = true;
+			board2[newRows2[i]][newCols2[i]] = true;
 		}
 		State child = new State(newRows, newCols, 1 + max(s1.getCostToReach(), s2.getCostToReach()));
-		return child;
+		State child2 = new State(newRows2, newCols2, 1 + max(s1.getCostToReach(), s2.getCostToReach()));
+		ArrayList<State> nextGeneration = new ArrayList<State>();
+		nextGeneration.add(child);
+		nextGeneration.add(child2);
+		return nextGeneration;
 	}
-	
-	
 
 	private int max(int n1, int n2) {
 		return n1 > n2 ? n1 : n2;

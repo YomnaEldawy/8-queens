@@ -58,6 +58,7 @@ public class HillClimbing implements IAlgorithm {
 			} else {
 				System.out.println("Starting over!");
 				current = State.random();
+				sidewayMoves = 0;
 				path = new ArrayList<State>();
 			}
 			path.add(current);

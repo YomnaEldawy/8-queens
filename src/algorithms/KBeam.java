@@ -40,6 +40,7 @@ public class KBeam implements IAlgorithm {
 		generateSuccessors();
 		while (iterations<X && !isDone)
 		{ 
+			System.out.println("iterations = " + iterations);
 			/*if we didn't get the goal 
 			 * from the first generated successors
 			 * then pick the best k states and get its successors

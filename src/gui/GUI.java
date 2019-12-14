@@ -197,7 +197,6 @@ public class GUI {
 				color = !color;
 				lbl.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
-						System.out.println("Clicked!");
 						int x = lbl.getBounds().x / 100;
 						int y = lbl.getBounds().y / 100;
 						if (!b[y][x]) {
@@ -209,9 +208,6 @@ public class GUI {
 							queensCount--;
 						}
 						b[y][x] = !b[y][x];
-						System.out.println(lbl.getBounds());
-						System.out.println(queensCount);
-
 					}
 				});
 			}
